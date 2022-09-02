@@ -25,6 +25,4 @@ class RegisterController extends Controller
         return response()->json(['message'=>'user  is exists !']);
     }
 
-
-
 }

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 class UserLoginController extends Controller
 {
     //
-
     public function login(Request $request)
     {
         $mail =   $request->email;
@@ -26,7 +25,12 @@ class UserLoginController extends Controller
         if (!$user || !Hash::check($password, $user->password)) {
             return response('Login invalid', 503);
         }
+
        $data = $user->createToken($request->name, ['server:update']);
-        return response()->json(['token' => $data->plainTextToken]);
+        return response()->json(
+            [
+                'token' => $data->plainTextToken
+            ]
+        );
     }
 }
